@@ -57,8 +57,8 @@ export function ListProdutos() {
                     <Button_Menu onPress={() => setTipoProduto('Produtos')} label={'Produtos'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('cervejas')} label={'Cervejas'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('whisky')} label={'Whisky'} activeCategory={tipoProduto} />
-                    <Button_Menu onPress={() => setTipoProduto('refrigerantes')} label={'Refrigerante'} activeCategory={tipoProduto} />
-                    <Button_Menu onPress={() => setTipoProduto('sucos')} label={'Suco'} activeCategory={tipoProduto} />
+                    <Button_Menu onPress={() => setTipoProduto('refrigerantes')} label={'Refrigerantes'} activeCategory={tipoProduto} />
+                    <Button_Menu onPress={() => setTipoProduto('sucos')} label={'Sucos'} activeCategory={tipoProduto} />
                 </ScrollView>
             </View>
             <FlatList

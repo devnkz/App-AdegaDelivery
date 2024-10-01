@@ -1,5 +1,5 @@
-import { Feather } from '@expo/vector-icons'
-import { TextInput, View, Button, FlatList, Text } from 'react-native'
+import { Feather } from '@expo/vector-icons';
+import { TextInput, View } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -20,7 +20,7 @@ export function SeachBar({ onpress, width, value, onChangeText }) {
     };
 
     return (
-        <View className='w-full items-center'>
+        <View className='w-full items-center p-5'>
             <View style={{ elevation: 10, width: width }} className='flex flex-row items-center gap-4 p-4 rounded-full bg-white'>
                 <Feather name='search' size={24} color={'black'} />
                 <TextInput
@@ -30,8 +30,6 @@ export function SeachBar({ onpress, width, value, onChangeText }) {
                     value={value}
                     onChangeText={onChangeText}
                 />
-
-                
             </View>
         </View>
     )
