@@ -1,6 +1,6 @@
 import { Text, ScrollView, Pressable, View, Button, FlatList, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Banner } from './banner'
 import { SeachBar } from '../../components/searchBar';
@@ -13,6 +13,7 @@ const Home = () => {
     const [visible, setVisible] = useState(true)
     const [buttonAlterVisible, setButtonAlterVisible] = useState(false)
     const [width, setWidth] = useState('100%')
+    let timer: NodeJS.Timeout;
 
     function alterVisibleFalse() {
         setVisible(false)
@@ -44,6 +45,21 @@ const Home = () => {
         }
     };
 
+    const handleInputChange = (input: string) => {
+        setQuery(input);
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            handleSearch();
+        }, 500);
+    };
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer);
+        };
+    }, []);
+
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{ flex: 1, backgroundColor: '#d3d3d3' }}>
@@ -57,17 +73,16 @@ const Home = () => {
                                 <Banner />
                             </>
                         )}
-                        <View className='flex-row items-center'>
+                        <View className='flex-row items-center p-4'>
                             {buttonAlterVisible && (
                                 <>
                                     <Pressable onPress={alterVisibleTrue} className='bg-black flex items-center justify-center p-3 rounded-full'>
                                         <Feather name={'arrow-left'} size={24} color={'white'} />
                                     </Pressable>
-                                    <Button title='Buscar' onPress={handleSearch} />
                                 </>
                             )}
 
-                            <SeachBar value={query} onChangeText={setQuery} onpress={() => {
+                            <SeachBar value={query} onChangeText={handleInputChange} onpress={() => {
                                 alterVisibleFalse();
                             }} width={width} />
 
@@ -88,7 +103,7 @@ const Home = () => {
                                                 <Text>{item.tamanho}</Text>
                                                 <Text className='text-3xl font-light text-green-600'>R$ {item.preco}</Text>
 
-                                                <Pressable onPress={() => alert('penis')} style={{ elevation: 5 }} className='flex flex-row items-center gap-2 w-36 justify-center rounded-lg p-2 bg-black mt-4'>
+                                                <Pressable onPress={() => alert('apenas um text')} style={{ elevation: 5 }} className='flex flex-row items-center gap-2 w-36 justify-center rounded-lg p-2 bg-black mt-4'>
                                                     <Feather name={'shopping-bag'} size={24} color={'white'} />
                                                     <Text className='text-base font-semibold text-white '>Adicionar</Text>
                                                 </Pressable>
