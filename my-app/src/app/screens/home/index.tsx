@@ -10,23 +10,24 @@ import { Header } from '../../components/header';
 
 const Home = () => {
 
+    //Alterar visibilidade quando clicar na SearchBar
     const [visible, setVisible] = useState(true)
     const [buttonAlterVisible, setButtonAlterVisible] = useState(false)
-    const [width, setWidth] = useState('100%')
-    let timer: NodeJS.Timeout;
+    const [TypeIcon, setTypeIcon] = useState('search');
 
     function alterVisibleFalse() {
         setVisible(false)
         setButtonAlterVisible(true)
-        setWidth('70%')
+        setTypeIcon('arrow-left')
     }
 
     function alterVisibleTrue() {
         setVisible(true)
         setButtonAlterVisible(false)
-        setWidth('100%')
+        setTypeIcon('search')
     }
 
+    //Funcao de busca da searchBar
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
 
@@ -44,6 +45,10 @@ const Home = () => {
             console.error('Erro ao buscar produtos:', error);
         }
     };
+
+
+    //Confirmar e exibir pesquisa conforme parar de digitar
+    let timer: NodeJS.Timeout;
 
     const handleInputChange = (input: string) => {
         setQuery(input);
@@ -73,18 +78,12 @@ const Home = () => {
                                 <Banner />
                             </>
                         )}
-                        <View className='flex-row items-center p-4'>
-                            {buttonAlterVisible && (
-                                <>
-                                    <Pressable onPress={alterVisibleTrue} className='bg-black flex items-center justify-center p-3 rounded-full'>
-                                        <Feather name={'arrow-left'} size={24} color={'white'} />
-                                    </Pressable>
-                                </>
-                            )}
-
-                            <SeachBar value={query} onChangeText={handleInputChange} onpress={() => {
+                        <View className='items-center p-4'>
+                            <SeachBar name={TypeIcon}
+                             iconPress={() =>{alterVisibleTrue()}} value={query} onChangeText={handleInputChange}
+                             onpress={() => {
                                 alterVisibleFalse();
-                            }} width={width} />
+                            }}/>
 
                         </View>
 

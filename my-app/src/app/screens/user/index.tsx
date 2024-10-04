@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useGlobalSearchParams } from 'expo-router';
 import { produtoProps } from '../../components/Flat_List';
+import { ButtonPay } from '../../components/ButtonPay';
 
 export default function user() {
 
@@ -79,6 +80,7 @@ export default function user() {
                             </View>
                         ))}
                     </ScrollView>
+                    <ButtonPay/>
                 </SafeAreaView>
             </SafeAreaProvider>
         </>
