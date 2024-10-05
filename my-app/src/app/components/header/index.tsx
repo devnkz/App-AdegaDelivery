@@ -1,15 +1,26 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import { useBag } from '../contextBag';
+import { useEffect, useState } from 'react';
 
-export function Header({linkRouter}) {
+export function Header() {
 
-    const router = useRouter();
+    const { cart, goToBag } = useBag();
+    const [visible, setVisible] = useState(false);
 
-    const handleBag = () =>{
-        router.push(linkRouter)
+    const HandleGoTobag = () => {
+        goToBag
     }
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            setVisible(true)
+        }
+    }, [cart]);
+
+
+
 
     return (
         <>
@@ -29,12 +40,14 @@ export function Header({linkRouter}) {
                                 Genesio Antonio Maschio</Text>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={handleBag}>
+                    <TouchableOpacity onPress={HandleGoTobag}>
+                        {visible && (
+                            <Text className='bg-white text-center w-6 rounded-full text-xl absolute left-6 bottom-8'>{cart.length}</Text>
+                        )}
                         <Feather name={'shopping-bag'} size={30} color={'#fff'} />
                     </TouchableOpacity>
                 </View>
             </View>
-
         </>
     )
 }

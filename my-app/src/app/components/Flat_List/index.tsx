@@ -20,7 +20,7 @@ export function ListProdutos() {
     const router = useRouter();
     const [produtos, setProdutos] = useState<produtoProps[]>([])
     const [tipoProduto, setTipoProduto] = useState<string>('Produtos');
-    const [cart, setCart] = useState<produtoProps[]>([]);
+
 
     const getProdutos = async () => {
         try {
@@ -36,18 +36,6 @@ export function ListProdutos() {
         getProdutos();
     }, [tipoProduto]);
 
-    const addToCart = (produto: produtoProps) => {
-        setCart(prevCart => [...prevCart, produto]);
-        alert("Produto adicionado ao carrinho:" + produto.nome);
-    };
-
-    const goToBag = () => {
-        const cartString = JSON.stringify(cart)
-        router.push({
-            pathname: '../user',
-            params: { cart: cartString },
-        })
-    }
 
     return (
         <>
@@ -66,8 +54,7 @@ export function ListProdutos() {
                 data={produtos}
                 renderItem={({ item }) => (
                     <View>
-                        <Button title="ir para sacola" onPress={goToBag}/>
-                        <Card_Produto produto={item} addToCart={addToCart} />
+                        <Card_Produto produto={item}/>
                     </View>
                 )}
                 contentContainerStyle={{ gap: 12 }}
