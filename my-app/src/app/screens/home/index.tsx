@@ -1,4 +1,4 @@
-import { Text, ScrollView, Pressable, View, Button, FlatList, Image } from 'react-native';
+import { Text, ScrollView, Pressable, View, FlatList, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useState, useEffect } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -7,10 +7,9 @@ import { SeachBar } from '../../components/searchBar';
 import { ListProdutos } from '../../components/Flat_List';
 import { Header } from '../../components/header';
 import { BagProvider } from '../../components/contextBag';
-import { useBag } from '../../components/contextBag';
 
 
-const Home = () => {
+const Home = () => { 
 
     //Alterar visibilidade quando clicar na SearchBar
     const [visible, setVisible] = useState(true)
@@ -76,7 +75,7 @@ const Home = () => {
                         <>
                             {visible && (
                                 <>
-                                    <Text className='text-3xl w-4/5 ml-6 font-semibold mt-4'>Somente as melhores, Bebidas matam sua sede</Text>
+                                    <Text className='text-3xl w-4/5 ml-6 mt-4 font-bold'>Somente as melhores, Bebidas matam sua sede</Text>
                                     <Text className='ml-6'>Faça um pedido e receba no conforto de sua casa</Text>
                                     <Banner />
                                 </>
