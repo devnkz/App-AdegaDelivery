@@ -8,7 +8,10 @@ export default function login() {
     const router = useRouter();
 
     const handleLogin = () => {
-        router.push('./screens/home')
+        router.replace('./screens/home')
+    }
+    const handleCadastro = () => {
+        router.push('./screens/cadastro')
     }
 
     return (
@@ -37,7 +40,7 @@ export default function login() {
                 
                 <View className= 'ml-4 w-4/5  flex-row'>
                     <Text className='text-gray-500'>Não possui conta ? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleCadastro}>
                         <Text className='font-bold'>Cadastre Agora</Text>
                     </TouchableOpacity>
                 </View>

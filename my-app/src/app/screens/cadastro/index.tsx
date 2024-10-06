@@ -8,7 +8,7 @@ const Cadastro = () => {
     const router = useRouter();
 
     const handleHome = () =>{
-        router.push('../home')
+        router.replace('../home')
     }
 
     const handleLogin = () =>{
@@ -31,11 +31,11 @@ const Cadastro = () => {
                 <Input placeholder={'Número da casa..'} nameIcon={'home'} />
 
                 <TouchableOpacity onPress={handleHome} style={{width: 330}}>
-                    <Text className='text-white bg-black p-4 rounded-full text-center font-light text-2xl'>Criar</Text>
+                    <Text className='text-white bg-black p-4 rounded-full text-center font-bold text-2xl'>Criar</Text>
                 </TouchableOpacity>
 
                 <Pressable onPress={handleLogin} className='w-4/5 ml-4'>
-                    <Text>Já Possui uma conta ?</Text>
+                    <Text  className='text-gray-500'>Já Possui uma conta ?</Text>
                 </Pressable>
             </View>
     )

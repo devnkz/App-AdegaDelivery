@@ -5,7 +5,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { SeachBar } from '../../components/searchBar';
 import { ListProdutos } from '../../components/Flat_List';
 import { Header } from '../../components/header';
-import { BagProvider } from '../../components/contextBag';
+import { BagProvider, useBag } from '../../components/contextBag';
+
 
 
 const Home = () => { 
@@ -65,6 +66,10 @@ const Home = () => {
         };
     }, []);
 
+    //Variavel do context
+
+    const { addToCart } = useBag();
+
     return (
         <BagProvider>
             <SafeAreaProvider>
@@ -102,7 +107,7 @@ const Home = () => {
                                                     <Text>{item.tamanho}</Text>
                                                     <Text className='text-3xl font-light text-green-600'>R$ {item.preco}</Text>
 
-                                                    <Pressable onPress={() => alert('teste')} style={{ elevation: 5 }} className='flex flex-row items-center gap-2 w-36 justify-center rounded-lg p-2 bg-black mt-4'>
+                                                    <Pressable onPress={() => addToCart(item)} style={{ elevation: 5 }} className='flex flex-row items-center gap-2 w-36 justify-center rounded-lg p-2 bg-black mt-4'>
                                                         <Feather name={'shopping-bag'} size={24} color={'white'} />
                                                         <Text className='text-base font-semibold text-white '>Adicionar</Text>
                                                     </Pressable>
