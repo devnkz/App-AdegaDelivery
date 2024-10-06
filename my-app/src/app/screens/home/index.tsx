@@ -2,7 +2,6 @@ import { Text, ScrollView, Pressable, View, FlatList, Image } from 'react-native
 import { Feather } from '@expo/vector-icons';
 import { useState, useEffect } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Banner } from './banner'
 import { SeachBar } from '../../components/searchBar';
 import { ListProdutos } from '../../components/Flat_List';
 import { Header } from '../../components/header';
@@ -77,7 +76,6 @@ const Home = () => {
                                 <>
                                     <Text className='text-3xl w-4/5 ml-6 mt-4 font-bold'>Somente as melhores, Bebidas matam sua sede</Text>
                                     <Text className='ml-6'>Faça um pedido e receba no conforto de sua casa</Text>
-                                    <Banner />
                                 </>
                             )}
                             <View className='items-center p-4'>

@@ -40,7 +40,7 @@ export function ListProdutos() {
     return (
         <>
             <View
-                className='w-full p-4 flex items-center'>
+                className='p-4 flex items-center'>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <Button_Menu onPress={() => setTipoProduto('Produtos')} label={'Produtos'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('cervejas')} label={'Cervejas'} activeCategory={tipoProduto} />
