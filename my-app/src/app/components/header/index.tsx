@@ -3,6 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useBag } from '../contextBag';
 import { useEffect, useState } from 'react';
+import { router } from 'expo-router';
 
 export function Header() {
 
@@ -10,7 +11,7 @@ export function Header() {
     const [visible, setVisible] = useState(false);
 
     const HandleGoTobag = () => {
-        goToBag
+        goToBag(router);
     }
 
     useEffect(() => {
