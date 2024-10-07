@@ -1,11 +1,13 @@
-import { useState, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { produtoProps } from "../Flat_List";
 import { useRouter } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface CartContextType {
-    cart: produtoProps[],
+    cart: produtoProps[];
     addToCart: (product: produtoProps) => void;
-    goToBag: (router: any) => void;
+    goToBag: () => void;
+    clearCart: () => void;
 }
 
 const BagContext = createContext<CartContextType | undefined>(undefined);
@@ -13,33 +15,71 @@ const BagContext = createContext<CartContextType | undefined>(undefined);
 export const BagProvider = ({ children }) => {
 
     const router = useRouter();
-
     const [cart, setCart] = useState<produtoProps[]>([]);
 
-    const addToCart = (produto: produtoProps) => {
+    useEffect(() => {
+        const loadCart = async () => {
+            try {
+                const savedCart = await AsyncStorage.getItem('cart');
+                if (savedCart) {
+                    setCart(JSON.parse(savedCart));
+                }
+            } catch (error) {
+                console.error("Erro ao carregar o carrinho do AsyncStorage:", error);
+            }
+        };
+        loadCart();
+    }, []);
+
+    const addToCart = async (produto: produtoProps) => {
         const produtoInCart = cart.some(item => item.id === produto.id);
         if (!produtoInCart) {
-            setCart(prevCart => [...prevCart, produto]);
-            alert("Produto adicionado ao carrinho:" + produto.nome);
-        }
-        else {
-            alert('produto ja adicionado');
+            const updatedCart = [...cart, produto];
+            setCart(updatedCart);
+            try {
+                await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));
+                alert("Produto adicionado ao carrinho: " + produto.nome);
+            } catch (error) {
+                console.error("Erro ao salvar o carrinho no AsyncStorage:", error);
+            }
+        } else {
+            alert('Produto já adicionado');
         }
     };
 
+
     const goToBag = () => {
-        const cartString = JSON.stringify(cart)
+        const cartString = JSON.stringify(cart);
         router.push({
             pathname: '../user',
             params: { cart: cartString },
-        })
+        });
     };
 
+    const clearCart = async () => {
+        try {
+            setCart([]);
+            console.log(cart)
+            await AsyncStorage.removeItem('cart');
+            alert("Carrinho limpo!");
+        } catch (error) {
+            console.error("Erro ao limpar o carrinho:", error);
+        }
+    };
+
+
+
     return (
-        <BagContext.Provider value={{ cart, addToCart, goToBag }}>
+        <BagContext.Provider value={{ cart, addToCart, goToBag, clearCart }}>
             {children}
         </BagContext.Provider>
     );
 };
 
-export const useBag = () => useContext(BagContext);
+export const useBag = () => {
+    const context = useContext(BagContext);
+    if (!context) {
+        throw new Error('useBag deve ser usado dentro de um BagProvider');
+    }
+    return context;
+}; 

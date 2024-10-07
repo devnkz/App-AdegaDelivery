@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import { Card_Produto } from "./Card_Produtos";
 import { Button_Menu } from "../button_menu";
-import { useRouter } from "expo-router";
-import { Button } from "react-native";
 
 export interface produtoProps {
     id: number,
@@ -16,8 +14,6 @@ export interface produtoProps {
 }
 
 export function ListProdutos() {
-
-    const router = useRouter();
     const [produtos, setProdutos] = useState<produtoProps[]>([])
     const [tipoProduto, setTipoProduto] = useState<string>('Produtos');
 
