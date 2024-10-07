@@ -50,10 +50,7 @@ export const BagProvider = ({ children }) => {
 
     const goToBag = () => {
         const cartString = JSON.stringify(cart);
-        router.push({
-            pathname: '../user',
-            params: { cart: cartString },
-        });
+        router.push(`../user?cart=${encodeURIComponent(cartString)}`);
     };
 
     const clearCart = async () => {
