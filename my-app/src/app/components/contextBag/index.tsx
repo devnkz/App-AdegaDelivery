@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface CartContextType {
     cart: produtoProps[];
     addToCart: (product: produtoProps) => void;
-    goToBag: () => void;
+    goToBag: (router: any) => void;
     clearCart: () => void;
 }
 
@@ -50,7 +50,10 @@ export const BagProvider = ({ children }) => {
 
     const goToBag = () => {
         const cartString = JSON.stringify(cart);
-        router.push(`../user?cart=${encodeURIComponent(cartString)}`);
+         router.push({
+            pathname: '../user',
+            params: { cart: cartString },
+        });
     };
 
     const clearCart = async () => {
