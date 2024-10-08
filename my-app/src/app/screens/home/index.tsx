@@ -1,5 +1,4 @@
-import { Text, ScrollView, Pressable, View, FlatList, Image } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { Text, ScrollView, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { SeachBar } from '../../components/searchBar';
@@ -7,15 +6,17 @@ import { ListProdutos } from '../../components/Flat_List';
 import { Header } from '../../components/header';
 import { BagProvider } from '../../components/contextBag';
 import { Results_SeachBar } from '../../components/FlatList_ResultSearchBar';
+import { NotFoundSearch } from '../../components/pesquiseNotFound';
 
 
 
-const Home = () => { 
+const Home = () => {
 
     //Alterar visibilidade quando clicar na SearchBar
     const [visible, setVisible] = useState(true)
     const [buttonAlterVisible, setButtonAlterVisible] = useState(false)
     const [TypeIcon, setTypeIcon] = useState('search');
+    const [ResultNotFound, setResultNotFound] = useState(false);
 
     function alterVisibleFalse() {
         setVisible(false)
@@ -31,7 +32,7 @@ const Home = () => {
 
     //Funcao de busca da searchBar
     const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<number>();
 
     const handleSearch = async () => {
         if (query.trim() === '') return;
@@ -43,10 +44,22 @@ const Home = () => {
             }
             const data = await response.json();
             setResults(data);
+
+            if (data === 0) {
+                setResultNotFound(true);
+            } else {
+                setResultNotFound(false);
+            }
+
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
         }
     };
+    useEffect(() => {
+        if (query.trim() === '') {
+            handleSearch();
+        }
+    }, [query]);
 
 
     //Confirmar e exibir pesquisa conforme parar de digitar
@@ -86,11 +99,12 @@ const Home = () => {
                                     onpress={() => {
                                         alterVisibleFalse();
                                     }} />
-
                             </View>
 
                             {buttonAlterVisible && (
-                                <Results_SeachBar results={results}/>
+                                <>
+                                    <Results_SeachBar results={results} />
+                                </>
                             )}
 
                             {visible && (
