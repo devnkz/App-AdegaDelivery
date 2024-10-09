@@ -16,8 +16,6 @@ export function Results_SeachBar({ results }) {
         }
     }, [results]);
 
-    console.log(visible)
-
 
     const { addToCart } = useBag();
 

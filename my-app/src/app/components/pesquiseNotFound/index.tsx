@@ -10,9 +10,9 @@ export function NotFoundSearch({text}) {
                 duration: 1500,
                 loop: true,
             }}
-            style={{ flex: 1 }} className="justify-center items-center">
-            <Image className='h-56 w-36' source={require('../../../assets/imgs/notFound.png')} />
-            <Text className="font-bold text-2xl">{text}</Text>
+            style={{ flex: 1 }} className="justify-center items-center ">
+            <Image className="h-96 w-60" source={require('../../../assets/imgs/notFound.png')} />
+            <Text className="font-bold text-3xl absolute bottom-24">{text}</Text>
         </MotiView>
     )
 }

@@ -45,21 +45,18 @@ const Home = () => {
             const data = await response.json();
             setResults(data);
 
-            if (data === 0) {
+            if ((Array.isArray(data) && data.length === 0) ||
+                (typeof data === 'object' && Object.keys(data).length === 0)) {
                 setResultNotFound(true);
             } else {
                 setResultNotFound(false);
             }
 
+
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
         }
     };
-    useEffect(() => {
-        if (query.trim() === '') {
-            handleSearch();
-        }
-    }, [query]);
 
 
     //Confirmar e exibir pesquisa conforme parar de digitar
@@ -104,6 +101,8 @@ const Home = () => {
                             {buttonAlterVisible && (
                                 <>
                                     <Results_SeachBar results={results} />
+                                    {ResultNotFound && (<NotFoundSearch text={'Item não encontrado!'} />)}
+
                                 </>
                             )}
 
