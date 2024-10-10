@@ -20,7 +20,7 @@ export function ListProdutos() {
 
     const getProdutos = async () => {
         try {
-            const response = await fetch(`http://192.168.1.10:3000/${tipoProduto}`);
+            const response = await fetch(`http://192.168.1.10:3000/api/produtoRoutes/${tipoProduto}`);
             const data: produtoProps[] = await response.json();
             setProdutos(data);
         } catch (error) {
@@ -38,7 +38,7 @@ export function ListProdutos() {
             <View
                 className='p-4 flex items-center'>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <Button_Menu onPress={() => setTipoProduto('Produtos')} label={'Produtos'} activeCategory={tipoProduto} />
+                    <Button_Menu onPress={() => setTipoProduto('produtos')} label={'Produtos'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('cervejas')} label={'Cervejas'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('whisky')} label={'Whisky'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('refrigerantes')} label={'Refrigerantes'} activeCategory={tipoProduto} />
