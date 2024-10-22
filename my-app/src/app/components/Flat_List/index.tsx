@@ -9,8 +9,8 @@ export interface produtoProps {
     tamanho: String,
     tipo: String,
     modelo: String,
-    url_image: string,
-    preco: number
+    url_img: string,
+    quantidade: number
 }
 
 export function ListProdutos() {
@@ -20,7 +20,7 @@ export function ListProdutos() {
 
     const getProdutos = async () => {
         try {
-            const response = await fetch(`http://192.168.1.10:3000/api/produtoRoutes/${tipoProduto}`);
+            const response = await fetch(`http://192.168.1.10:3333/api/produtoRoutes/${tipoProduto}`);
             const data: produtoProps[] = await response.json();
             setProdutos(data);
         } catch (error) {
@@ -42,7 +42,6 @@ export function ListProdutos() {
                     <Button_Menu onPress={() => setTipoProduto('cervejas')} label={'Cervejas'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('whisky')} label={'Whisky'} activeCategory={tipoProduto} />
                     <Button_Menu onPress={() => setTipoProduto('refrigerantes')} label={'Refrigerantes'} activeCategory={tipoProduto} />
-                    <Button_Menu onPress={() => setTipoProduto('sucos')} label={'Sucos'} activeCategory={tipoProduto} />
                 </ScrollView>
             </View>
             <FlatList

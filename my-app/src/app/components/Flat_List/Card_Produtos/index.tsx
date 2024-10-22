@@ -15,7 +15,7 @@ export function Card_Produto({ produto } : { produto: produtoProps}) {
                     <Text>{produto.tipo}</Text>
                     <Text>{produto.modelo}</Text>
                     <Text>{produto.tamanho}</Text>
-                    <Text className='text-3xl font-light text-green-600'>R$ {produto.preco}</Text>
+                    <Text className='text-3xl font-light text-green-600'>R$ {produto.quantidade}</Text>
 
                     <Pressable onPress={() => {addToCart(produto)}} style={{ elevation: 5 }} className='flex flex-row items-center gap-2 w-36 justify-center rounded-lg p-2 bg-black mt-4'>
                         <Feather name={'shopping-bag'} size={24} color={'white'} />

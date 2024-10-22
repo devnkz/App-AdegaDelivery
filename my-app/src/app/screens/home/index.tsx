@@ -38,7 +38,7 @@ const Home = () => {
         if (query.trim() === '') return;
 
         try {
-            const response = await fetch(`http://192.168.1.10:3000/api/produtoRoutes/pesquisa?q=${query}`);
+            const response = await fetch(`http://192.168.1.10:3333/api/produtoRoutes/pesquisa?q=${query}`);
             if (!response.ok) {
                 throw new Error('Erro na resposta da rede');
             }
